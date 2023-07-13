@@ -28,5 +28,5 @@ app.get('/:handle', async (req, res) => {
 app.get('/', (req, res) => {
     res.status(200).send("Hi you are at right endpoint just add /handle_of_user at the end of url");
 })
-
-app.listen(80);
+const PORT = process.env.PORT || 8800;
+app.listen(PORT);
