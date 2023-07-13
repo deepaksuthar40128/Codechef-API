@@ -63,9 +63,4 @@ Start the server
 ```
 
 
-## Tech Stack
-
-**Client:** React, Redux, TailwindCSS
-
-**Server:** Node, Express
 
