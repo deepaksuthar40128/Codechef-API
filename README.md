@@ -5,7 +5,7 @@ This is a RESTful API built with Node.js that allows users to retrieve data of o
 The API uses web scraping techniques with Axios, JSDOM, and Express to fetch and parse the required information.
 
 ## API Reference
-
+https://codechef-api.vercel.app/handle_of_user
 #### Get all items
 
 ```http
@@ -24,16 +24,7 @@ The API uses web scraping techniques with Axios, JSDOM, and Express to fetch and
 
 ## Demo
 
-Insert gif or link to demo
-
-
-## Deployment
-
-To deploy this project run
-
-```bash
-  npm run deploy
-```
+ https://codechef-api.vercel.app/one_deepak
 
 
 ## Installation
@@ -41,8 +32,8 @@ To deploy this project run
 Install my-project with npm
 
 ```bash
-  npm install my-project
-  cd my-project
+  npm install
+  cd codechef-api
 ```
     
 ## Run Locally
@@ -50,13 +41,13 @@ Install my-project with npm
 Clone the project
 
 ```bash
-  git clone https://link-to-project
+  git clone https://github.com/deepaksuthar40128/Codechef-API
 ```
 
 Go to the project directory
 
 ```bash
-  cd my-project
+  cd codechef-api
 ```
 
 Install dependencies
