@@ -4,6 +4,8 @@
 This is a RESTful API built with Node.js that allows users to retrieve data of other CodeChef users using their handle.
 The API uses web scraping techniques with Axios, JSDOM, and Express to fetch and parse the required information.
 
+#### If you like it please star it 🥺
+
 ## API Reference
 https://codechef-api.vercel.app/handle_of_user
 #### Get all items
