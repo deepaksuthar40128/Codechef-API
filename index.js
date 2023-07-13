@@ -26,7 +26,7 @@ app.get('/:handle', async (req, res) => {
     }
 })
 app.get('/', (req, res) => {
-    res.status(200).send("Hi you are at right endpoint just add /handle_of_user at the end of url");
+    res.status(200).send("Hi you are at right endpoint just add /handle_of_user at the end of url\n Developer: Github-repo(https://github.com/deepaksuthar40128/Codechef-API);
 })
 const PORT = process.env.PORT || 8800;
 app.listen(PORT);
