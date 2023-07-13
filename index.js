@@ -9,7 +9,7 @@ app.get('/:handle', async (req, res) => {
         let data = await axios.get(`https://www.codechef.com/users/${req.params.handle}`);
         let dom = new JSDOM(data.data);
         let document = dom.window.document;
-        res.send({
+        res.status(200).send({
             success: true,
             profile: document.querySelector('.user-details-container').children[0].children[0].src,
             name: document.querySelector('.user-details-container').children[0].children[1].textContent,
@@ -24,6 +24,9 @@ app.get('/:handle', async (req, res) => {
     } catch (err) {
         res.send({ success: false, error: err });
     }
+})
+app.get('/', (req, res) => {
+    res.status(200).send("Hi you are at right endpoint just add /handle_of_user at the end of url");
 })
 
 app.listen(80);
