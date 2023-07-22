@@ -13,12 +13,12 @@ app.get('/:handle', async (req, res) => {
             success: true,
             profile: document.querySelector('.user-details-container').children[0].children[0].src,
             name: document.querySelector('.user-details-container').children[0].children[1].textContent,
-            currentRating: document.querySelector(".rating-number").textContent,
+            currentRating: parseInt(document.querySelector(".rating-number").textContent),
             highestRating: parseInt(document.querySelector(".rating-number").parentNode.children[4].textContent.split('Rating')[1]),
             countryFlag: document.querySelector('.user-country-flag').src,
             countryName: document.querySelector('.user-country-name').textContent,
-            globalRank: document.querySelector('.rating-ranks').children[0].children[0].children[0].children[0].innerHTML,
-            countryRank: document.querySelector('.rating-ranks').children[0].children[1].children[0].children[0].innerHTML,
+            globalRank: parseInt(document.querySelector('.rating-ranks').children[0].children[0].children[0].children[0].innerHTML),
+            countryRank: parseInt(document.querySelector('.rating-ranks').children[0].children[1].children[0].children[0].innerHTML),
             stars: document.querySelector('.rating').textContent || "unrated",
         });
     } catch (err) {
