@@ -1,8 +1,12 @@
 const axios = require('axios');
 const jsdom = require("jsdom");
-const express = require('express')
-const app = express();
+const express = require('express');
+const cors = require('cors'); 
 const { JSDOM } = jsdom;
+
+const app = express();
+ 
+app.use(cors());
 
 app.get('/:handle', async (req, res) => {
     try {
@@ -24,9 +28,13 @@ app.get('/:handle', async (req, res) => {
     } catch (err) {
         res.send({ success: false, error: err });
     }
-})
+});
+
 app.get('/', (req, res) => {
     res.status(200).send("Hi you are at right endpoint just add /handle_of_user at the end of url Github-repo(https://github.com/deepaksuthar40128/Codechef-API) Thanks for 🌟");
-})
+});
+
 const PORT = process.env.PORT || 8800;
-app.listen(PORT);
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
