@@ -11,6 +11,13 @@ app.use(cors());
 app.get('/:handle', async (req, res) => {
     try {
         let data = await axios.get(`https://www.codechef.com/users/${req.params.handle}`);
+        let heatMapDataCursour1 = data.data.search("var userDailySubmissionsStats =") + "var userDailySubmissionsStats =".length;
+        let heatMapDataCursour2 = data.data.search("'#js-heatmap")-9;
+        let heatDataString = data.data.substring(heatMapDataCursour1,heatMapDataCursour2)
+        let headMapData = JSON.parse(heatDataString)
+        let allRating = data.data.search("var all_rating = ") + "var all_rating = ".length;
+        let allRating2 = data.data.search("var current_user_rating =") - 6;
+        let ratingData = JSON.parse(data.data.substring(allRating,allRating2))
         let dom = new JSDOM(data.data);
         let document = dom.window.document;
         res.status(200).send({
@@ -24,6 +31,8 @@ app.get('/:handle', async (req, res) => {
             globalRank: parseInt(document.querySelector('.rating-ranks').children[0].children[0].children[0].children[0].innerHTML),
             countryRank: parseInt(document.querySelector('.rating-ranks').children[0].children[1].children[0].children[0].innerHTML),
             stars: document.querySelector('.rating').textContent || "unrated",
+            heatMap:headMapData,
+            ratingData
         });
     } catch (err) {
         res.send({ success: false, error: err });
