@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .heatmap-container h3 {
+            font: bold normal 18px Helvetica, sans-serif;
+            line-height: 1.6;
+            color: #4a4a4a;
+            border-top: 1px solid;
+            margin-top: 15px;
+            padding-top: 10px;
+            margin-bottom: 0px;
+        }
+
+        svg rect.day {
+            fill: #d9d9d9;
+            shape-rendering: crispedges;
+        }
+
+        svg rect.day:hover {
+            stroke: #aaa;
+            stroke-width: 1px;
+        }
+
+        svg rect.day[category] {
+            fill: #d9d9d9;
+        }
+
+        svg rect.day[category='0'] {
+            fill: #6cbffc;
+        }
+
+        svg rect.day[category='1'] {
+            fill: #c1deae;
+        }
+
+        svg rect.day[category='2'] {
+            fill: #91c788;
+        }
+
+        svg rect.day[category='3'] {
+            fill: #78b279;
+        }
+
+        svg rect.day[category='4'] {
+            fill: #519259;
+        }
+
+        svg rect.day[category='5'] {
+            fill: #064635;
+        }
+
+        svg rect.night {
+            fill: #bdbdbd; 
+            shape-rendering: crispedges; 
+        }
+
+        svg rect.night:hover {
+            stroke: #d0d0d0; 
+            stroke-width: 1px; 
+        }
+
+        svg rect.night[category] {
+            fill: #909090; 
+        }
+
+        svg rect.night[category='0'] {
+            fill: #6cbffc; 
+        }
+
+        svg rect.night[category='1'] {
+            fill: #a5a5a5; 
+        }
+
+        svg rect.night[category='2'] {
+            fill: #8d8d8d; 
+        }
+
+        svg rect.night[category='3'] {
+            fill: #5c5c5c; 
+        }
+
+        svg rect.night[category='4'] {
+            fill: #333333; 
+        }
+
+        svg rect.night[category='5'] {
+            fill: #010101; 
+        }
+
+
+        svg text {
+            fill: #ccc;
+            font-size: 11px;
+        }
+
+        svg text.month {
+            fill: #aaa;
+        }
+
+        .svg-tag {
+            background-color: rgba(0, 0, 0, 0.8);
+            border-radius: 3px;
+            color: #eee;
+            font-size: 12px;
+            line-height: 15px;
+            padding: 5px 15px;
+            position: absolute;
+            text-align: center;
+        }
+
+        .svg-tag:after {
+            border-color: rgba(0, 0, 0, 0.8) transparent transparent transparent;
+            border-style: solid;
+            border-width: 5px 5px 0 5px;
+            bottom: -5px;
+            content: '';
+            height: 0;
+            left: 50%;
+            margin-left: -5px;
+            position: absolute;
+            width: 0;
+        }
+
+        #debug {
+            color: red;
+            font-weight: bold;
+        }
+
+        text,
+        .month {
+            font-family: 'Arial';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 8px;
+            line-height: 100%;
+            color: #4a4a4a !important;
+            fill: #4a4a4a !important;
+        }
+
+        .month {
+            font-size: 12px;
+        }
+
+        .headerContent {
+            font-weight: bold;
+            font-size: 13px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="js-heatmap" class="heatmap-container"></div> 
+    <script>
+        'use strict'
+        let loadHeatMap = (userDailySubmissionsStats) => {
+            var heatTheme = "<%=theme%>";
+            var tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+
+            heatmap(userDailySubmissionsStats, tomorrow);
+
+            function heatmap(userDailySubmissionsStats, tomorrow) {
+                var container = document.getElementById('js-heatmap');
+                container.innerHTML = '';
+                var settings = {
+                    months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    weeks: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    targetQuantity: '.heatmap-quantity',
+                    tagId: 'heatmap-svgTag',
+                    showTomorrow: false,
+                    tomorrow: tomorrow,
+                    eventClick: (data) => { console.log(data) },
+                };
+
+                var pivot = 35;
+                var svgElement = createElementSvg('svg', { width: 30 * 20 + 2 * pivot, height: 7 * 22 + 2 * pivot });
+                var gElementContainer = createElementSvg('g', { transform: `translate(${pivot}, ${pivot})` });
+                var headerContent = createElementSvg('text', { x: '0', y: -10 });
+                headerContent.textContent = 'Last 6 Months Only';
+                headerContent.classList.add('headerContent')
+                gElementContainer.appendChild(headerContent);
+                var tagElement = document.createElement('div');
+                tagElement.classList.add('svg-tag');
+                tagElement.setAttribute('id', settings.tagId);
+                tagElement.style.display = 'none';
+                document.body.appendChild(tagElement);
+
+                var dayCount = 26 * 7 + (settings.tomorrow.getDay() + 6) % 7;
+                var monthCount;
+
+                var k = 6;
+                var gap = calculateGap(settings, dayCount);
+
+                for (var i = 0; i < 27; i++) {
+                    var gElement = createElementSvg('g', { transform: 'translate(' + 20 * i + ',0)' });
+                    var firstDate = new Date(settings.tomorrow);
+                    firstDate.setMonth(settings.tomorrow.getMonth());
+                    firstDate.setFullYear(settings.tomorrow.getFullYear());
+                    firstDate.setDate(settings.tomorrow.getDate() - dayCount - 1);
+
+                    var daysLeft = daysInMonth(firstDate) - firstDate.getDate();
+
+                    for (var j = firstDate.getDay(); j < 7; j++) {
+                        var rectDate = new Date(settings.tomorrow);
+                        rectDate.setMonth(settings.tomorrow.getMonth());
+                        rectDate.setFullYear(settings.tomorrow.getFullYear());
+                        rectDate.setDate(settings.tomorrow.getDate() - dayCount);
+
+                        if (rectDate.getMonth() != monthCount && i < 52 && j > 3 && daysLeft > 7) {
+                            var textMonth = createElementSvg('text', { x: k, y: '160', class: 'month' });
+                            k += gap;
+                            textMonth.textContent = settings.months[rectDate.getMonth()];
+                            gElementContainer.appendChild(textMonth);
+                            monthCount = rectDate.getMonth();
+                        }
+
+                        dayCount--;
+                        if (dayCount >= 0 || (settings.showTomorrow && dayCount >= -1)) {
+                            var rectElement = createElementSvg('rect', {
+                                class: heatTheme,
+                                width: '14px',
+                                height: '14px',
+                                rx: '2px',
+                                'data-date': `${rectDate.getFullYear()}-${rectDate.getMonth() + 1}-${rectDate.getDate()}`,
+                                y: 20 * j,
+                            });
+
+                            rectElement.addEventListener('mouseover', function () {
+                                var dateString = this.getAttribute('data-date').split('-');
+                                var date = new Date(dateString[0], dateString[1] - 1, dateString[2]);
+
+                                var tagDate = getBeautyDate(date);
+                                var tagCount = this.getAttribute('data-count');
+                                var tagCountData = this.getAttribute('data-count');
+
+                                if (tagCountData) {
+                                    if (tagCountData >= 1) {
+                                        tagCount = tagCountData + ' runs + submissions';
+                                    } else {
+                                        tagCount = 'Streak freeze';
+                                    }
+                                } else {
+                                    tagCount = 'No run/submissions';
+                                }
+
+                                tagElement.innerHTML = '<b>' + tagCount + '</b> on ' + tagDate;
+                                tagElement.style.display = 'block';
+                                tagElement.style.left = this.getBoundingClientRect().left - tagElement.offsetWidth / 2 + 5 + 'px';
+                                tagElement.style.top = this.getBoundingClientRect().top - 33 + 'px';
+                            });
+
+                            rectElement.addEventListener('mouseleave', function () {
+                                tagElement.textContent = '';
+                                tagElement.style.display = 'none';
+                            });
+
+                            rectElement.addEventListener('click', function () {
+                                settings.eventClick({
+                                    date: this.getAttribute('data-date'),
+                                    count: this.getAttribute('data-count') || 0,
+                                });
+                            });
+
+                            gElement.appendChild(rectElement);
+                        }
+                    }
+
+                    gElementContainer.appendChild(gElement);
+                }
+
+                for (var i = 0; i < 7; ++i) {
+                    if (i % 2 == 1) {
+                        continue;
+                    }
+                    var curDay = createElementSvg('text', { x: '-35', y: `${(20 * i) + 12}` });
+                    curDay.textContent = settings.weeks[i];
+                    gElementContainer.appendChild(curDay);
+                }
+
+                svgElement.appendChild(gElementContainer);
+                container.appendChild(svgElement);
+
+                fillData(userDailySubmissionsStats);
+
+                function createElementSvg(type, prop) {
+                    var e = document.createElementNS('http://www.w3.org/2000/svg', type);
+                    for (var p in prop) {
+                        e.setAttribute(p, prop[p]);
+                    }
+                    return e;
+                }
+
+                function fillData(userDailySubmissionsStats) {
+                    var submissionCount = 0;
+                    for (var m in userDailySubmissionsStats) {
+                        var cur = container.querySelector(`rect.${heatTheme}[data-date="${userDailySubmissionsStats[m].date}"]`);
+                        if (cur) {
+                            cur.setAttribute('data-count', parseInt(userDailySubmissionsStats[m].value));
+                            cur.setAttribute('category', Math.min(Math.ceil(parseInt(userDailySubmissionsStats[m].value) / 5), 5));
+                            submissionCount += parseInt(userDailySubmissionsStats[m].value);
+                        }
+                    }
+                    document.querySelector(settings.targetQuantity).textContent = userDailySubmissionsStats.length + ' days, ' + submissionCount + ' submissions';
+                }
+
+                function calculateGap(settings, dayCount) {
+                    var count = 0;
+                    var monthCount = null;
+                    for (var i = 0; i < 27; i++) {
+                        var firstDate = new Date(settings.tomorrow);
+                        firstDate.setMonth(settings.tomorrow.getMonth());
+                        firstDate.setFullYear(settings.tomorrow.getFullYear());
+                        firstDate.setDate(settings.tomorrow.getDate() - dayCount - 1);
+                        var daysLeft = daysInMonth(firstDate) - firstDate.getDate();
+
+                        for (var j = firstDate.getDay(); j < 7; j++) {
+                            var rectDate = new Date(settings.tomorrow);
+                            rectDate.setMonth(settings.tomorrow.getMonth());
+                            rectDate.setFullYear(settings.tomorrow.getFullYear());
+                            rectDate.setDate(settings.tomorrow.getDate() - dayCount);
+                            if (rectDate.getMonth() != monthCount && i < 52 && j > 3 && daysLeft > 7) {
+                                monthCount = rectDate.getMonth();
+                                ++count;
+                            }
+
+                            dayCount--;
+                        }
+                    }
+
+                    return (count > 6) ? 80 : 95;
+                }
+
+                function daysInMonth(d) {
+                    return 32 - new Date(d.getFullYear(), d.getMonth(), 32).getDate();
+                }
+
+                function getBeautyDate(a) {
+                    return settings.months[a.getMonth()] + ' ' + a.getDate() + ', ' + a.getFullYear();
+                }
+            }
+        }
+        let loadData = () => {
+            return new Promise(async (resolve, reject) => { 
+                let handle = "<%=handle%>";
+                if (handle.length) {
+                    let res = await fetch(`https://codechef-api.vercel.app/${handle}`)
+                    let data = await res.json();
+                    if (!data || !data.success) {
+                        reject('Error during fetching or handle may not exist');
+                    } else {
+                        resolve(data.heatMap);
+                    }
+                } else reject('Invalid handle type');
+            })
+        }
+        document.addEventListener("DOMContentLoaded", async function () {
+            try {
+                let res = await loadData();
+                if (res) {
+                    loadHeatMap(res);
+                }
+            } catch (err) {
+                console.log(err)
+            }
+        });
+    </script>
+</body>
+
+</html>

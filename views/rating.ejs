@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rating Graph</title>
+    <style>
+        .rating-info{
+            display: flex;
+            width: 400px;
+            height: 150px;
+            border: 1px solid rgb(178, 178, 178);
+            margin: auto;
+            display: none;
+            border-radius: 5px;
+        }
+        .rating-number{
+            width: 30%;
+            color: white;
+        }
+        .rating-info h4{
+            text-align: center;
+            font-size: 18px;
+            padding-top: 30px;
+        }
+        .rating-oinfo{
+            width: 70%;
+            padding: 20px;
+        }
+        .rating-oinfo h5{
+            font-size: 18px;
+            font-weight: normal;
+            margin: 10px;
+            margin-left: 0;
+        }
+        .rating-oinfo small{
+            display: block;
+            color: gray;
+            margin-bottom: 5px;
+        }
+        .rating-oinfo span{
+            display: block;
+            font-size: 15px;
+        }
+    </style>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+</head>
+
+<body>
+    <div style="width: 700px;">
+        <div class="rating-info" id="rating-info">
+            
+        </div>
+        <div id="cumulative"></div>
+    </div>
+    <script>
+        let loadData = () => {
+            return new Promise(async (resolve, reject) => {
+                let handle = "<%=handle%>";
+                if (handle.length) {
+                    let res = await fetch(`https://codechef-api.vercel.app/${handle}`)
+                    let data = await res.json();
+                    if (!data || !data.success) {
+                        reject('Error during fetching or handle may not exist');
+                    } else {
+                        resolve(data.ratingData);
+                    }
+                } else reject('Invalid handle type');
+            })
+        }
+        document.addEventListener('DOMContentLoaded', async () => {
+            const ratingData = await loadData();
+
+            function ratingGraphSelection(t, e) {
+                document.getElementById("cumulative").style.display = "block";
+            }
+
+            function createGraph(container, data) {
+                const chart = Highcharts.chart(container, {
+                    credits: { enabled: false },
+                    chart: {
+                        polar: true,
+                        type: 'line',
+                        zoomType: 'xy'
+                    },
+                    plotOptions: {
+                        line: {
+                            lineWidth: 1,
+                            color: '#000'
+                        },
+                        series: {
+                            pointStart: data.length > 0 ? data[0].getyear : 2008,
+                            allowPointSelect: true,
+                            cursor: 'pointer',
+                            marker: {
+                                enabled: true,
+                                states: {
+                                    select: {
+                                        enabled: true
+                                    }
+                                }
+                            },
+                            states: {
+                                hover: {
+                                    enabled: true,
+                                    lineWidth: 1
+                                }
+                            }
+                        }
+                    },
+                    title: { text: null },
+                    tooltip: { enabled: false },
+                    xAxis: {
+                        type: 'datetime',
+                        dateTimeLabelFormats: {
+                            day: '%Y',
+                            week: '%Y',
+                            month: '%Y',
+                            year: '%Y'
+                        },
+                        title: { text: 'Year' }
+                    },
+                    yAxis: {
+                        gridLineDashStyle: 'longdash',
+                        title: { text: 'Rating' }
+                    },
+                    series: [{
+                        name: 'Rating',
+                        data: data.map(item => [
+                            Date.UTC(item.getyear, item.getmonth - 1, item.getday),
+                            parseInt(item.rating)
+                        ]),
+                        cdata: data
+                    }]
+                });
+
+                chart.reflow();
+                return chart;
+            }
+            //remove penalised contests
+            const allRatings = ratingData.filter(item => !item.penalised_in);
+            let chart = createGraph('cumulative', allRatings);
+
+            chart.series[0].points.forEach(point => {
+                point.graphic.element.addEventListener('click', () => {
+                    const data = point.series.options.cdata[point.index];
+                    document.getElementById('rating-info').innerHTML=`
+                    <div class="rating-number" style="background:${data.color}">
+                        <h4>${data.rating}</h4>
+                    </div>
+                    <div class="rating-oinfo">
+                        <h5>${data.name}</h5>
+                        <small>(${data.end_date})</small>
+                        <span>Global Rank: ${data.rank}</span>
+                    </div>
+                    `
+                    document.getElementById('rating-info').style.display='flex'
+                });
+            });
+        });
+
+    </script>
+</body>
+
+</html>

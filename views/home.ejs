@@ -1,0 +1,621 @@
+<html lang="en" class="_neKTiNR9ODo9dbROzCM dark" dm-allow-colors="" dm-default-theme="dark" dm-allow-transitions="">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/flowbite-typography@1.0.3/dist/typography.min.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: { "50": "#eff6ff", "100": "#dbeafe", "200": "#bfdbfe", "300": "#93c5fd", "400": "#60a5fa", "500": "#3b82f6", "600": "#2563eb", "700": "#1d4ed8", "800": "#1e40af", "900": "#1e3a8a", "950": "#172554" }
+                    }
+                },
+                fontFamily: {
+                    "body": ["Inter", "ui-sans-serif", "system-ui", "-apple-system", "system-ui", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", "Noto Sans", "sans-serif", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"],
+                    "sans": ["Inter", "ui-sans-serif", "system-ui", "-apple-system", "system-ui", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", "Noto Sans", "sans-serif", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"]
+                }
+            }
+        }
+    </script>
+    <title>Codechef-API</title>
+    <link rel="stylesheet"
+        href="https://d2s3ptptdai04x.cloudfront.net/get-flowbite-pro.91c4ee51-ddee-41e4-bb52-32edc27c4479.css?Expires=2014649547&amp;Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9kMnMzcHRwdGRhaTA0eC5jbG91ZGZyb250Lm5ldC9nZXQtZmxvd2JpdGUtcHJvLjkxYzRlZTUxLWRkZWUtNDFlNC1iYjUyLTMyZWRjMjdjNDQ3OS5jc3MiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjIwMTQ2NDk1NDd9fX1dfQ__&amp;Signature=qRfGS2sNH8DL9n7SvwZyhkRHqeyI2gnNa36FHwVLjp81JuJZnew7M93hRPB9jMjPvzFZw-KDmtoRWrhVXpTQ7bNCCtcGIZ4FXGeGYhmvtNEH8iKGTz4xkoDbduQiQzdvTm1uIz3m9wKSew1UQOjyEGUgLqi5lrUuZmdHZaqEeMtaBVV2MCfc6doG9chrh2LG6Z8YtJAzuTsVHSxS1b0iaZ42xdE9UuPrUKE5IxFD300mC-e3DpfbnI3fguX5S8-oIsQHP47cB9~zofJ0FGZ8uUfUVzgvJYKITohkVUZRP30md1itHEpn0UbdCovx~5ZPG6XArJk6KNDv31x7ZaIOBA__&amp;Key-Pair-Id=K2J5W1U51CTOXP">
+    <style>
+        /* ! tailwindcss v3.4.3 | MIT License | https://tailwindcss.com */
+        *,
+        ::after,
+        ::before {
+            box-sizing: border-box;
+            border-width: 0;
+            border-style: solid;
+            border-color: #e5e7eb
+        }
+
+        ::after,
+        ::before {
+            --tw-content: ''
+        }
+
+        :host,
+        html {
+            line-height: 1.5;
+            -webkit-text-size-adjust: 100%;
+            -moz-tab-size: 4;
+            tab-size: 4;
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, system-ui, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+            font-feature-settings: normal;
+            font-variation-settings: normal;
+            -webkit-tap-highlight-color: transparent
+        }
+
+        body {
+            margin: 0;
+            line-height: inherit
+        }
+
+        hr {
+            height: 0;
+            color: inherit;
+            border-top-width: 1px
+        }
+
+        abbr:where([title]) {
+            -webkit-text-decoration: underline dotted;
+            text-decoration: underline dotted
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-size: inherit;
+            font-weight: inherit
+        }
+
+        a {
+            color: inherit;
+            text-decoration: inherit
+        }
+
+        b,
+        strong {
+            font-weight: bolder
+        }
+
+        code,
+        kbd,
+        pre,
+        samp {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-feature-settings: normal;
+            font-variation-settings: normal;
+            font-size: 1em
+        }
+
+        small {
+            font-size: 80%
+        }
+
+        sub,
+        sup {
+            font-size: 75%;
+            line-height: 0;
+            position: relative;
+            vertical-align: baseline
+        }
+
+        sub {
+            bottom: -.25em
+        }
+
+        sup {
+            top: -.5em
+        }
+
+        table {
+            text-indent: 0;
+            border-color: inherit;
+            border-collapse: collapse
+        }
+
+        button,
+        input,
+        optgroup,
+        select,
+        textarea {
+            font-family: inherit;
+            font-feature-settings: inherit;
+            font-variation-settings: inherit;
+            font-size: 100%;
+            font-weight: inherit;
+            line-height: inherit;
+            letter-spacing: inherit;
+            color: inherit;
+            margin: 0;
+            padding: 0
+        }
+
+        button,
+        select {
+            text-transform: none
+        }
+
+        button,
+        input:where([type=button]),
+        input:where([type=reset]),
+        input:where([type=submit]) {
+            -webkit-appearance: button;
+            background-color: transparent;
+            background-image: none
+        }
+
+        :-moz-focusring {
+            outline: auto
+        }
+
+        :-moz-ui-invalid {
+            box-shadow: none
+        }
+
+        progress {
+            vertical-align: baseline
+        }
+
+        ::-webkit-inner-spin-button,
+        ::-webkit-outer-spin-button {
+            height: auto
+        }
+
+        [type=search] {
+            -webkit-appearance: textfield;
+            outline-offset: -2px
+        }
+
+        ::-webkit-search-decoration {
+            -webkit-appearance: none
+        }
+
+        ::-webkit-file-upload-button {
+            -webkit-appearance: button;
+            font: inherit
+        }
+
+        summary {
+            display: list-item
+        }
+
+        blockquote,
+        dd,
+        dl,
+        figure,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        hr,
+        p,
+        pre {
+            margin: 0
+        }
+
+        fieldset {
+            margin: 0;
+            padding: 0
+        }
+
+        legend {
+            padding: 0
+        }
+
+        menu,
+        ol,
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0
+        }
+
+        dialog {
+            padding: 0
+        }
+
+        textarea {
+            resize: vertical
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            opacity: 1;
+            color: #9ca3af
+        }
+
+        [role=button],
+        button {
+            cursor: pointer
+        }
+
+        :disabled {
+            cursor: default
+        }
+
+        audio,
+        canvas,
+        embed,
+        iframe,
+        img,
+        object,
+        svg,
+        video {
+            display: block;
+            vertical-align: middle
+        }
+
+        img,
+        video {
+            max-width: 100%;
+            height: auto
+        }
+
+        [hidden] {
+            display: none
+        }
+
+        *,
+        ::before,
+        ::after {
+            --tw-border-spacing-x: 0;
+            --tw-border-spacing-y: 0;
+            --tw-translate-x: 0;
+            --tw-translate-y: 0;
+            --tw-rotate: 0;
+            --tw-skew-x: 0;
+            --tw-skew-y: 0;
+            --tw-scale-x: 1;
+            --tw-scale-y: 1;
+            --tw-pan-x: ;
+            --tw-pan-y: ;
+            --tw-pinch-zoom: ;
+            --tw-scroll-snap-strictness: proximity;
+            --tw-gradient-from-position: ;
+            --tw-gradient-via-position: ;
+            --tw-gradient-to-position: ;
+            --tw-ordinal: ;
+            --tw-slashed-zero: ;
+            --tw-numeric-figure: ;
+            --tw-numeric-spacing: ;
+            --tw-numeric-fraction: ;
+            --tw-ring-inset: ;
+            --tw-ring-offset-width: 0px;
+            --tw-ring-offset-color: #fff;
+            --tw-ring-color: rgb(59 130 246 / 0.5);
+            --tw-ring-offset-shadow: 0 0 #0000;
+            --tw-ring-shadow: 0 0 #0000;
+            --tw-shadow: 0 0 #0000;
+            --tw-shadow-colored: 0 0 #0000;
+            --tw-blur: ;
+            --tw-brightness: ;
+            --tw-contrast: ;
+            --tw-grayscale: ;
+            --tw-hue-rotate: ;
+            --tw-invert: ;
+            --tw-saturate: ;
+            --tw-sepia: ;
+            --tw-drop-shadow: ;
+            --tw-backdrop-blur: ;
+            --tw-backdrop-brightness: ;
+            --tw-backdrop-contrast: ;
+            --tw-backdrop-grayscale: ;
+            --tw-backdrop-hue-rotate: ;
+            --tw-backdrop-invert: ;
+            --tw-backdrop-opacity: ;
+            --tw-backdrop-saturate: ;
+            --tw-backdrop-sepia: ;
+            --tw-contain-size: ;
+            --tw-contain-layout: ;
+            --tw-contain-paint: ;
+            --tw-contain-style:
+        }
+
+        ::backdrop {
+            --tw-border-spacing-x: 0;
+            --tw-border-spacing-y: 0;
+            --tw-translate-x: 0;
+            --tw-translate-y: 0;
+            --tw-rotate: 0;
+            --tw-skew-x: 0;
+            --tw-skew-y: 0;
+            --tw-scale-x: 1;
+            --tw-scale-y: 1;
+            --tw-pan-x: ;
+            --tw-pan-y: ;
+            --tw-pinch-zoom: ;
+            --tw-scroll-snap-strictness: proximity;
+            --tw-gradient-from-position: ;
+            --tw-gradient-via-position: ;
+            --tw-gradient-to-position: ;
+            --tw-ordinal: ;
+            --tw-slashed-zero: ;
+            --tw-numeric-figure: ;
+            --tw-numeric-spacing: ;
+            --tw-numeric-fraction: ;
+            --tw-ring-inset: ;
+            --tw-ring-offset-width: 0px;
+            --tw-ring-offset-color: #fff;
+            --tw-ring-color: rgb(59 130 246 / 0.5);
+            --tw-ring-offset-shadow: 0 0 #0000;
+            --tw-ring-shadow: 0 0 #0000;
+            --tw-shadow: 0 0 #0000;
+            --tw-shadow-colored: 0 0 #0000;
+            --tw-blur: ;
+            --tw-brightness: ;
+            --tw-contrast: ;
+            --tw-grayscale: ;
+            --tw-hue-rotate: ;
+            --tw-invert: ;
+            --tw-saturate: ;
+            --tw-sepia: ;
+            --tw-drop-shadow: ;
+            --tw-backdrop-blur: ;
+            --tw-backdrop-brightness: ;
+            --tw-backdrop-contrast: ;
+            --tw-backdrop-grayscale: ;
+            --tw-backdrop-hue-rotate: ;
+            --tw-backdrop-invert: ;
+            --tw-backdrop-opacity: ;
+            --tw-backdrop-saturate: ;
+            --tw-backdrop-sepia: ;
+            --tw-contain-size: ;
+            --tw-contain-layout: ;
+            --tw-contain-paint: ;
+            --tw-contain-style:
+        }
+
+        .items-center {
+            align-items: center
+        }
+
+        .justify-center {
+            justify-content: center
+        }
+
+        .border-primary-600 {
+            --tw-border-opacity: 1;
+            border-color: rgb(37 99 235 / var(--tw-border-opacity))
+        }
+
+        .bg-primary-700 {
+            --tw-bg-opacity: 1;
+            background-color: rgb(29 78 216 / var(--tw-bg-opacity))
+        }
+
+        .text-primary-600 {
+            --tw-text-opacity: 1;
+            color: rgb(37 99 235 / var(--tw-text-opacity))
+        }
+
+        .hover\:bg-primary-800:hover {
+            --tw-bg-opacity: 1;
+            background-color: rgb(30 64 175 / var(--tw-bg-opacity))
+        }
+
+        .hover\:text-primary-700:hover {
+            --tw-text-opacity: 1;
+            color: rgb(29 78 216 / var(--tw-text-opacity))
+        }
+
+        .focus\:border-primary-500:focus {
+            --tw-border-opacity: 1;
+            border-color: rgb(59 130 246 / var(--tw-border-opacity))
+        }
+
+        .focus\:ring-primary-200:focus {
+            --tw-ring-opacity: 1;
+            --tw-ring-color: rgb(191 219 254 / var(--tw-ring-opacity))
+        }
+
+        .focus\:ring-primary-300:focus {
+            --tw-ring-opacity: 1;
+            --tw-ring-color: rgb(147 197 253 / var(--tw-ring-opacity))
+        }
+
+        .focus\:ring-primary-500:focus {
+            --tw-ring-opacity: 1;
+            --tw-ring-color: rgb(59 130 246 / var(--tw-ring-opacity))
+        }
+
+        .dark\:bg-primary-600:is(.dark *) {
+            --tw-bg-opacity: 1;
+            background-color: rgb(37 99 235 / var(--tw-bg-opacity))
+        }
+
+        .dark\:text-primary-500:is(.dark *) {
+            --tw-text-opacity: 1;
+            color: rgb(59 130 246 / var(--tw-text-opacity))
+        }
+
+        .dark\:hover\:bg-primary-700:hover:is(.dark *) {
+            --tw-bg-opacity: 1;
+            background-color: rgb(29 78 216 / var(--tw-bg-opacity))
+        }
+
+        .dark\:focus\:border-primary-500:focus:is(.dark *) {
+            --tw-border-opacity: 1;
+            border-color: rgb(59 130 246 / var(--tw-border-opacity))
+        }
+
+        .dark\:focus\:ring-primary-500:focus:is(.dark *) {
+            --tw-ring-opacity: 1;
+            --tw-ring-color: rgb(59 130 246 / var(--tw-ring-opacity))
+        }
+
+        .dark\:focus\:ring-primary-800:focus:is(.dark *) {
+            --tw-ring-opacity: 1;
+            --tw-ring-color: rgb(30 64 175 / var(--tw-ring-opacity))
+        }
+
+        .dark\:focus\:ring-primary-900:focus:is(.dark *) {
+            --tw-ring-opacity: 1;
+            --tw-ring-color: rgb(30 58 138 / var(--tw-ring-opacity))
+        }
+        .t5D88HfSsyfzALJWQB8tc{
+            background-image: url('/image/codechef.png');
+        }
+    </style>
+    <style>
+        html {
+            filter: !important
+        }
+    </style>
+</head>
+
+<body>
+    <main style="padding-bottom: 160px;"
+        class="qxQKLrerTcVAZpiRGDQZ eQ7XcPIYS0NmU3TZr7ji yjGyQxv8jnYk9_MGMqLN zlFmyfujKXCLCPyPEOIS cmyDPxbqOqbqHiEyGnG8">
+        <header
+            class="t5D88HfSsyfzALJWQB8tc jCISvWkW5oStPH6Wrb_H WpRYr14lnkKDxaIQzJ_o _xc9_ta26QtN17Sx1_Fe _6AI6SY1lyVfKpv37xl0 POA0xdG25nlhxqWJyl1U pcWvkQQ8p_VQZFs_K2QA zencAbqT6WdOZbhcPVjf QYPW4nl6nHaIbrtaXf4h">
+            <div
+                class="iZ8W30HPRQAuO6al90LU _ccvJ9JsfoF81kZ3lkJh _J57_xJ7KhmAX1D2Pnei jCISvWkW5oStPH6Wrb_H j34KztD3SBxL_tQWzosr _ngJt2TgM57HPYTCC5GA F6maSyXBC_uv_A_dciar">
+            </div>
+            <div
+                class="iZ8W30HPRQAuO6al90LU PojEYad6nPpbKmAUjVBI c1ibYmNHw6Cxfcu_pPgz veFXkDzfJN473U3ycrV8 RV8RoaI_SlEMC5CEQ3ms jCISvWkW5oStPH6Wrb_H HV01LldvyEqRHHy0hljF wfpSIkDBCpd44vEdymO_ BRg_hinIPYxGN5WJ_Xay KWb4ZbhYGt096ggQOJa_ Xjxpb8u_H96dZt4r1eF6">
+                <h1
+                    class="_9OKVeTXzfSwD_NYO6_G I5nnt4bpo_o8qp1p2_FC _e063bssp_1bldcJ6kR0 P2kov_od1FPjxxII24T5 MxQqv3Z913orO6JQGGbH wP9HMsqy6b96l2HBRbgb fQ3UmoCh_2qglPqQf5CZ vAGTG1e_BcCgc9_9R6z3">
+                    How to use Codechef-API
+                </h1>
+                <p class="VwrSTsh__so52zqMJvws oTkHpmOXEgQRdykOe3sq pDeChwIM17vwwm9ZmlIw">Show your daily submissions
+                    (heatmap) and contest progress in your portfolio easily.</p>
+            </div>
+        </header>
+        <div
+            class="kqgYncRJQ7spwKfig6It QYPW4nl6nHaIbrtaXf4h MN_MaEuEFmiXUnb4S5NS _T15kfOPGkvwZnqhqKce rhHZLKCNkg6rp7jwfB1J O7PVNyZQb9PCjpNKbt_t KmicKCo2aIIAJvfPPnrM HV01LldvyEqRHHy0hljF yjGyQxv8jnYk9_MGMqLN _cpMMPjFQqjJu4i0Puod YPSoR6AXtPgkmylUmcbT _oadEIkQd6OQiaXef3p8 arrNNfkSdu1f3lPZlfMG _ocA0sk94abY4DpqKzYF">
+            <article style="width: 100%;"
+                class="trp_bA_rt_zvxYf81Zkg jCISvWkW5oStPH6Wrb_H QFvy_qHEb4VhI8nsNH9k format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
+                
+                <p class="lead">Codechef-api is an open-source free to use api to scrape the data from codechef.</p>
+                <p>You can use directly our components and add them to your portfolio or use JSON data and design
+                    according to you.</p>
+                <br>
+                <p>API:</p>
+                <p>https://codechef-api.vercel.app/{handle}</p>
+                <hr>
+                <p class="lead">Components:</p>
+                <p style="font-size: 25px; text-decoration: underline;">Heatmap</p>
+                <p>Heatmap is show your daily submission counts but the data only shows last 6 month (as codechef
+                    provide data on only last 6 months)</p>
+                <figure><img src="/image/heatmap1.png" alt="" class="RV8RoaI_SlEMC5CEQ3ms">
+                    <figcaption>Light Theme</figcaption>
+                </figure>
+                <figure><img src="/image/heatmap2.png" alt="" class="RV8RoaI_SlEMC5CEQ3ms">
+                    <figcaption>Dark Theme</figcaption>
+                </figure>
+                <br>
+                <p class="lead">How to Use:</p>
+                <p>You can use directly by adding this iframe tag in your code</p>
+
+                <div class="relative max-w-2xl mx-auto">
+                    <div class="bg-gray-900 text-white p-4 rounded-md">
+                        <div class="overflow-x-auto">
+                            <pre id="code1" class="text-gray-300 code" style="display: flex;"
+                                data-clipboard-target="#code1" onclick="alert('Code copied')">
+                          <code id="code11"> 
+                         </code>
+                            <script>
+                                document.getElementById('code11').innerText = '<iframe src="https://codechef-api.vercel.app/heatmap/{handle}"></iframe>';
+                            </script>
+                        </pre>
+                        </div>
+                    </div>
+                </div>
+                <p>You can change the theme by setting theme=night or theme=day. The default theme is day.</p>
+                <p>Background of heatmap is transparent you can control it according to you :)</p>
+                <div class="relative max-w-2xl mx-auto">
+                    <div class="bg-gray-900 text-white p-4 rounded-md">
+                        <div class="overflow-x-auto">
+                            <pre id="code2" class="text-gray-300 code" style="display: flex;"
+                                data-clipboard-target="#code2" onclick="alert('Code copied')">
+                             <code id="code22"> 
+                            </code>
+                            <script>
+                                document.getElementById('code22').innerText = '<iframe src="https://codechef-api.vercel.app/heatmap/{handle}?theme=night"></iframe>';
+                            </script>
+                        </pre>
+                        </div>
+                    </div>
+                </div>
+                <p>Or you can customize according to you using json data of your profile</p>
+                <p>Here is api:</p>
+                <div class="relative max-w-2xl mx-auto">
+                    <div class="bg-gray-900 text-white p-4 rounded-md">
+                        <div class="overflow-x-auto">
+                            <pre id="code3" class="text-gray-300 code" style="display: flex;"
+                                data-clipboard-target="#code3" onclick="alert('Code copied')">
+                             <code id="code33"> 
+                            </code>
+                            <script>
+                                document.getElementById('code33').innerText = 'https://codechef-api.vercel.app/{handle}';
+                            </script>
+                        </pre>
+                        </div>
+                    </div>
+                </div>
+<br><br>
+<hr><br>
+
+                <p style="font-size: 25px; text-decoration: underline;">Rating Graph</p>
+                <p>Rating graph shows your progress in contest and also shows contest details</p>
+                <figure><img src="/image/rating.png" alt="" class="RV8RoaI_SlEMC5CEQ3ms"> 
+                </figure>
+                <br>
+                <p class="lead">How to Use:</p>
+                <p>You can use directly by adding this iframe tag in your code</p>
+                <div class="relative max-w-2xl mx-auto">
+                    <div class="bg-gray-900 text-white p-4 rounded-md">
+                        <div class="overflow-x-auto">
+                            <pre id="code4" class="text-gray-300 code" style="display: flex;"
+                                data-clipboard-target="#code4" onclick="alert('Code copied')">
+                          <code id="code44"> 
+                         </code>
+                            <script>
+                                document.getElementById('code44').innerText = '<iframe src="https://codechef-api.vercel.app/rating/wjli/{handle}"></iframe>';
+                            </script>
+                        </pre>
+                        </div>
+                    </div>
+                </div>
+                <p>Or you can customize according to you using json data of your profile</p>
+                <p>Here is api:</p>
+                <div class="relative max-w-2xl mx-auto">
+                    <div class="bg-gray-900 text-white p-4 rounded-md">
+                        <div class="overflow-x-auto">
+                            <pre id="code55" class="text-gray-300 code" style="display: flex;"
+                                data-clipboard-target="#code55" onclick="alert('Code copied')">
+                             <code id="code5555"> 
+                            </code>
+                            <script>
+                                document.getElementById('code5555').innerText = 'https://codechef-api.vercel.app/{handle}';
+                            </script>
+                        </pre>
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+                <br>
+                <p>If you like it,give it a 🌟 :)</p>
+            </article>
+        </div></main></body></html>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
+    <script>
+        new ClipboardJS('.code');
+    </script>
