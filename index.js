@@ -18,12 +18,13 @@ app.get("/rating/:handle", (req, res) => {
   res.render("rating", { handle: req.params.handle });
 });
 
-app.get("/:handle", async (req, res) => {
+app.get("/handle/:handle", async (req, res) => {
   try { 
+    if(req.params.handle==='favicon.ico')res.send({ success: false, error: err }); 
     const resdata = await fetch(`https://www.codechef.com/users/${req.params.handle}`);
     let d = await resdata.text();
     let data = { data: d };
-    let heatMapDataCursour1 =
+    let heatMapDataCursour1 = 
       data.data.search("var userDailySubmissionsStats =") +
       "var userDailySubmissionsStats =".length;
     let heatMapDataCursour2 = data.data.search("'#js-heatmap") - 9;
@@ -66,8 +67,7 @@ app.get("/:handle", async (req, res) => {
       heatMap: headMapData,
       ratingData,
     });
-  } catch (err) {
-    console.log(err)
+  } catch (err) { 
     res.send({ success: false, error: err });
   }
 });

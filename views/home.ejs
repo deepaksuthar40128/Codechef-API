@@ -474,12 +474,27 @@
     </style>
     <style>
         html {
-            filter: !important
+            filter: none ! important
+        }
+        .warning{
+            width: 100%;
+            height: 100px;
+            position: sticky;
+            top: 0;
+            font-size: 20px;
+            text-align: center;
+            padding-top: 20px;
+            font-weight: bold;
+            background-color: rgba(219, 69, 42, 0.726);
+            color: white;
         }
     </style>
 </head>
 
 <body>
+    <div class="warning">
+        Please change URL from https://codechef-api.vercel.app/{handle of user} to  https://codechef-api.vercel.app/<b>handle</b>/{handle of user}
+    </div>
     <main style="padding-bottom: 160px;"
         class="qxQKLrerTcVAZpiRGDQZ eQ7XcPIYS0NmU3TZr7ji yjGyQxv8jnYk9_MGMqLN zlFmyfujKXCLCPyPEOIS cmyDPxbqOqbqHiEyGnG8">
         <header
@@ -507,7 +522,7 @@
                     according to you.</p>
                 <br>
                 <p>API:</p>
-                <p>https://codechef-api.vercel.app/{handle}</p>
+                <p>https://codechef-api.vercel.app/handle/{handle}</p>
                 <hr>
                 <p class="lead">Components:</p>
                 <p style="font-size: 25px; text-decoration: underline;">Heatmap</p>
@@ -563,7 +578,7 @@
                              <code id="code33"> 
                             </code>
                             <script>
-                                document.getElementById('code33').innerText = 'https://codechef-api.vercel.app/{handle}';
+                                document.getElementById('code33').innerText = 'https://codechef-api.vercel.app/handle/{handle}';
                             </script>
                         </pre>
                         </div>
@@ -603,7 +618,7 @@
                              <code id="code5555"> 
                             </code>
                             <script>
-                                document.getElementById('code5555').innerText = 'https://codechef-api.vercel.app/{handle}';
+                                document.getElementById('code5555').innerText = 'https://codechef-api.vercel.app/handle/{handle}';
                             </script>
                         </pre>
                         </div>

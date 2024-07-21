@@ -7,7 +7,7 @@ The API uses web scraping techniques with Axios, JSDOM, and Express to fetch and
 #### If you like it please star it 🥺
 
 ## API Reference
-https://codechef-api.vercel.app/handle_of_user
+https://codechef-api.vercel.app/handle/handle_of_user
 #### Get all items
 
 ```http
@@ -26,7 +26,7 @@ https://codechef-api.vercel.app/handle_of_user
 
 ## Demo
 
- https://codechef-api.vercel.app/one_deepak
+ https://codechef-api.vercel.app/handle/one_deepak
 
 
 ## Installation

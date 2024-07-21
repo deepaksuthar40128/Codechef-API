@@ -59,7 +59,7 @@
             return new Promise(async (resolve, reject) => {
                 let handle = "<%=handle%>";
                 if (handle.length) {
-                    let res = await fetch(`https://codechef-api.vercel.app/${handle}`)
+                    let res = await fetch(`https://codechef-api.vercel.app/handle/${handle}`)
                     let data = await res.json();
                     if (!data || !data.success) {
                         reject('Error during fetching or handle may not exist');
