@@ -2,7 +2,7 @@ const axios = require("axios");
 const jsdom = require("jsdom");
 const express = require("express");
 const cors = require("cors");
-const { JSDOM } = jsdom;
+const { JSDOM } = jsdom; 
 
 const app = express();
 
@@ -76,6 +76,11 @@ app.get("/", (req, res) => {
   res.render("home");
   // res.status(200).send("Hi you are at right endpoint just add /handle_of_user at the end of url Github-repo(https://github.com/deepaksuthar40128/Codechef-API) Thanks for 🌟");
 });
+
+
+app.get("*", (req, res) => {
+  res.send({ success: false, error: "Invalid Endpoint kindly change your url from https://codechef-api.vercel.app/{handle of user} to https://codechef-api.vercel/handle/{handle of user}" });
+})
 
 const PORT = process.env.PORT || 8800;
 app.listen(PORT, () => {
