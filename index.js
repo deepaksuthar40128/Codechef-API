@@ -78,8 +78,11 @@ app.get("/", (req, res) => {
 });
 
 
-app.get("*", (req, res) => {
-  res.send({ success: false, error: "Invalid Endpoint kindly change your url from https://codechef-api.vercel.app/{handle of user} to https://codechef-api.vercel/handle/{handle of user}" });
+app.get("/:handle", (req, res) => {
+  const handle = req.params.handle
+  if(handle&&handle.length&&!handle.includes('.'))res.redirect(`/handle/${handle}`);
+  else
+  res.send({ success: false, error: `Invalid Endpoint kindly change your url from https://codechef-api.vercel.app/${handle} to https://codechef-api.vercel/handle/${handle} or may be incorrect handle` });
 })
 
 const PORT = process.env.PORT || 8800;
