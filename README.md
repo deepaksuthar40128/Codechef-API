@@ -42,7 +42,7 @@ https://codechef-api.vercel.app/handle/handle_of_user
 
 ## Authors
 
-- [Adeshpal07]([https://www.github.com/deepaksuthar40128](https://github.com/Adeshpal07))
+- [@Adeshpal07]([https://www.github.com/deepaksuthar40128](https://github.com/Adeshpal07))
 - [@deepaksuthar40128](https://www.github.com/deepaksuthar40128) 
 
 
