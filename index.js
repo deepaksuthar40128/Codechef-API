@@ -18,12 +18,11 @@ app.get("/rating/:handle", (req, res) => {
   res.render("rating", { handle: req.params.handle });
 });
 
-app.get("/handle/:handle", async (req, res) => {
-  try {
-    if (req.params.handle === "favicon.ico")
-      res.send({ success: false, error: err });
+
+const fecher =async (handle)=>{
+  try{
     const resdata = await fetch(
-      `https://www.codechef.com/users/${req.params.handle}`
+      `https://www.codechef.com/users/${handle}`
     ); 
     if (resdata.status == 200) {
       let d = await resdata.text(); 
@@ -43,8 +42,9 @@ app.get("/handle/:handle", async (req, res) => {
       let ratingData = JSON.parse(data.data.substring(allRating, allRating2));
       let dom = new JSDOM(data.data);
       let document = dom.window.document;
-      res.status(200).send({
+      return {
         success: true,
+        status:resdata.status,
         profile: document.querySelector(".user-details-container").children[0]
           .children[0].src,
         name: document.querySelector(".user-details-container").children[0]
@@ -70,13 +70,28 @@ app.get("/handle/:handle", async (req, res) => {
         stars: document.querySelector(".rating").textContent || "unrated",
         heatMap: headMapData,
         ratingData,
-      });
+      };
     }
     else{
-      for(let i=0;i<100000;i++){}
-      res.redirect(`/handle/${req.params.handle}`);
+      return {success:false,status:resdata.status}
     }
-  } catch (err) { 
+  }catch(e){
+    return {success:false,status:404}
+  }
+}
+
+app.get("/handle/:handle", async (req, res) => {
+  try {
+    if (req.params.handle === "favicon.ico")
+      res.send({ success: false, error: 'invalid handle' });
+    let handle = req.params.handle;
+      let resd = await fecher(handle);
+      while(resd.status==429){
+        for(let i=0;i<1000000;i++){}
+        resd = await fecher(handle);
+      }
+      res.send(resd)
+    }catch (err) { 
     res.send({ success: false, error: err });
   }
 });
