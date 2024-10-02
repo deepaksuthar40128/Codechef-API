@@ -50,24 +50,23 @@ const fecher =async (handle)=>{
         name: document.querySelector(".user-details-container").children[0]
           .children[1].textContent,
         currentRating: parseInt(
-          document.querySelector(".rating-number").textContent
+          document.querySelector(".rating-number")?.textContent
         ),
         highestRating: parseInt(
           document
-            .querySelector(".rating-number")
-            .parentNode.children[4].textContent.split("Rating")[1]
+            .querySelector(".rating-number")?.parentNode?.children[4]?.textContent?.split("Rating")[1]
         ),
         countryFlag: document.querySelector(".user-country-flag").src,
         countryName: document.querySelector(".user-country-name").textContent,
         globalRank: parseInt(
-          document.querySelector(".rating-ranks").children[0].children[0]
-            .children[0].children[0].innerHTML
+          document.querySelector(".rating-ranks")?.children[0]?.children[0]
+            ?.children[0]?.children[0]?.innerHTML
         ),
         countryRank: parseInt(
-          document.querySelector(".rating-ranks").children[0].children[1]
-            .children[0].children[0].innerHTML
+          document.querySelector(".rating-ranks")?.children[0]?.children[1]
+            ?.children[0]?.children[0]?.innerHTML
         ),
-        stars: document.querySelector(".rating").textContent || "unrated",
+        stars: document.querySelector(".rating")?.textContent || "unrated",
         heatMap: headMapData,
         ratingData,
       };
@@ -76,6 +75,7 @@ const fecher =async (handle)=>{
       return {success:false,status:resdata.status}
     }
   }catch(e){
+    console.log(e)
     return {success:false,status:404}
   }
 }
