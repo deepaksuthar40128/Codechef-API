@@ -25,16 +25,18 @@ const fecher =async (handle)=>{
       `https://www.codechef.com/users/${handle}`
     ); 
     if (resdata.status == 200) {
+
       let d = await resdata.text(); 
       let data = { data: d };
       let heatMapDataCursour1 =
-        data.data.search("var userDailySubmissionsStats =") +
-        "var userDailySubmissionsStats =".length;
-      let heatMapDataCursour2 = data.data.search("'#js-heatmap") - 9;
+      data.data.search("var userDailySubmissionsStats =") +
+      "var userDailySubmissionsStats =".length;
+      let heatMapDataCursour2 = data.data.search("'#js-heatmap") - 34;
       let heatDataString = data.data.substring(
         heatMapDataCursour1,
         heatMapDataCursour2
       );
+      // console.log(heatDataString)
       let headMapData = JSON.parse(heatDataString);
       let allRating =
         data.data.search("var all_rating = ") + "var all_rating = ".length;
