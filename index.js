@@ -1,11 +1,18 @@
 const axios = require("axios");
 const jsdom = require("jsdom");
-const express = require("express"); 
+const express = require("express");
 const cors = require("cors");
+const { default: rateLimit } = require("express-rate-limit");
 const { JSDOM } = jsdom;
 
 const app = express();
 
+const limiter = rateLimit({
+  windowMs: 60 * 1000,
+  limit: 60,
+})
+
+app.use(limiter);
 app.use(cors());
 app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");
@@ -19,18 +26,18 @@ app.get("/rating/:handle", (req, res) => {
 });
 
 
-const fecher =async (handle)=>{
-  try{
+const fecher = async (handle) => {
+  try {
     const resdata = await fetch(
       `https://www.codechef.com/users/${handle}`
-    ); 
+    );
     if (resdata.status == 200) {
 
-      let d = await resdata.text(); 
+      let d = await resdata.text();
       let data = { data: d };
       let heatMapDataCursour1 =
-      data.data.search("var userDailySubmissionsStats =") +
-      "var userDailySubmissionsStats =".length;
+        data.data.search("var userDailySubmissionsStats =") +
+        "var userDailySubmissionsStats =".length;
       let heatMapDataCursour2 = data.data.search("'#js-heatmap") - 34;
       let heatDataString = data.data.substring(
         heatMapDataCursour1,
@@ -46,7 +53,7 @@ const fecher =async (handle)=>{
       let document = dom.window.document;
       return {
         success: true,
-        status:resdata.status,
+        status: resdata.status,
         profile: document.querySelector(".user-details-container").children[0]
           .children[0].src,
         name: document.querySelector(".user-details-container").children[0]
@@ -73,12 +80,12 @@ const fecher =async (handle)=>{
         ratingData,
       };
     }
-    else{
-      return {success:false,status:resdata.status}
+    else {
+      return { success: false, status: resdata.status }
     }
-  }catch(e){
+  } catch (e) {
     console.log(e)
-    return {success:false,status:404}
+    return { success: false, status: 404 }
   }
 }
 
@@ -87,13 +94,13 @@ app.get("/handle/:handle", async (req, res) => {
     if (req.params.handle === "favicon.ico")
       res.send({ success: false, error: 'invalid handle' });
     let handle = req.params.handle;
-      let resd = await fecher(handle);
-      while(resd.status==429){
-        for(let i=0;i<1000000;i++){}
-        resd = await fecher(handle);
-      }
-      res.send(resd)
-    }catch (err) { 
+    let resd = await fecher(handle);
+    while (resd.status == 429) {
+      for (let i = 0; i < 1000000; i++) { }
+      resd = await fecher(handle);
+    }
+    res.send(resd)
+  } catch (err) {
     res.send({ success: false, error: err });
   }
 });
