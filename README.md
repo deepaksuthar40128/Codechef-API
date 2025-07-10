@@ -1,4 +1,4 @@
-# Kindle update your API URL
+# Kindle update your API URL 😀
 from `https://codechef-api.vercel.app/{handle of user}` to `https://codechef-api.vercel.app/handle/{handle of user}`
 
 
@@ -42,7 +42,8 @@ https://codechef-api.vercel.app/handle/handle_of_user
 
 ## Authors
 
-- [@deepaksuthar40128](https://www.github.com/deepaksuthar40128)
+- [@Adeshpal07](https://github.com/Adeshpal07)
+- [@deepaksuthar40128](https://www.github.com/deepaksuthar40128) 
 
 
 ## Demo
